@@ -19,7 +19,9 @@ export const metadata: Metadata = {
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <html lang='en' className={atma.className}>
-      <body>{children}</body>
+      <body>
+        <main className='min-h-screen'>{children}</main>
+      </body>
     </html>
   )
 }
