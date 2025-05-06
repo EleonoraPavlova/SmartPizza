@@ -1,5 +1,4 @@
 import { FlatCompat } from '@eslint/eslintrc'
-import prettierPlugin from 'eslint-plugin-prettier'
 import eslintReactRefresh from 'eslint-plugin-react-refresh'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import unusedImports from 'eslint-plugin-unused-imports'
@@ -14,13 +13,12 @@ const compat = new FlatCompat({
 })
 
 const config = [
-  ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  ...compat.extends('next/core-web-vitals', 'next/typescript', 'eslint-config-prettier'),
   {
     plugins: {
       'react-refresh': eslintReactRefresh,
       'simple-import-sort': simpleImportSort,
       'unused-imports': unusedImports,
-      prettier: prettierPlugin,
     },
   },
   {
@@ -37,7 +35,6 @@ const config = [
   },
   {
     rules: {
-      'prettier/prettier': 'error',
       'react/jsx-uses-react': 'off',
       'react/react-in-jsx-scope': 'off',
       'no-unused-vars': [

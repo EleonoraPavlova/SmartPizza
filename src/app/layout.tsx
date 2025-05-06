@@ -16,11 +16,7 @@ export const metadata: Metadata = {
   description: 'Enjoy the best pizza recipes. A wide range of toppings and dough for every taste',
 }
 
-const RootLayout = ({
-  children,
-}: Readonly<{
-  children: ReactNode
-}>) => {
+const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <html lang='en' className={atma.className}>
       <body>{children}</body>
