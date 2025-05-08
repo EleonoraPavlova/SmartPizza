@@ -1,19 +1,22 @@
 'use client'
 
-import { Button } from '@/components/ui/button/button'
+import { useState } from 'react'
+
+import { Card } from '@/shared/card'
+import CategoriesTabs from '@/shared/categoriesTabs/categoriesTabs'
+import { CATEGORIES } from '@/shared/categoriesTabs/categoriesTabs.const'
+import { Typography } from '@/shared/typography'
 
 const Home = () => {
-  const handleClick = () => {
-    console.log('open')
-  }
+  const [activeTab, setActiveTab] = useState<string>(CATEGORIES[0].value)
 
   return (
-    <>
-      Home
-      <Button onClick={handleClick} variant='outline' className='font-[Atma]'>
-        Open
-      </Button>
-    </>
+    <Card className='gap-[20px] flex flex-col'>
+      <Typography as='h1' variant='h1'>
+        All pizzas
+      </Typography>
+      <CategoriesTabs tabs={CATEGORIES} onChange={setActiveTab} activeTab={activeTab} />
+    </Card>
   )
 }
 

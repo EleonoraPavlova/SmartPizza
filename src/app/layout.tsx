@@ -1,8 +1,9 @@
 import './globals.css'
 
-import type { Metadata } from 'next'
 import { Atma } from 'next/font/google'
 import { ReactNode } from 'react'
+
+import { Header } from '@/shared/header'
 
 const atma = Atma({
   weight: ['400', '500', '600', '700'],
@@ -11,15 +12,11 @@ const atma = Atma({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'Pizza',
-  description: 'Enjoy the best pizza recipes. A wide range of toppings and dough for every taste',
-}
-
 const RootLayout = ({ children }: Readonly<{ children: ReactNode }>) => {
   return (
     <html lang='en' className={atma.className}>
-      <body>
+      <body className='bg-primary/80 p-[30px]'>
+        <Header />
         <main className='min-h-screen'>{children}</main>
       </body>
     </html>
