@@ -13,7 +13,7 @@ interface Props {
 const CategoriesTabs = ({ tabs, activeTab, onChange }: Props): ReactElement => {
   return (
     <Tabs defaultValue={tabs[0].value} onValueChange={onChange}>
-      <TabsList className='gap-4 w-[60%]'>
+      <TabsList className='gap-4 w-full'>
         {tabs.map((t) => (
           <TabsTrigger value={t.value} key={t.value} className={t.value === activeTab ? 'text-primary' : ''}>
             {t.label}

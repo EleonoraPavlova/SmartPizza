@@ -1,13 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 
 import { Card } from '@/shared/card'
-import CategoriesTabs from '@/shared/categoriesTabs/categoriesTabs'
 import { CATEGORIES } from '@/shared/categoriesTabs/categoriesTabs.const'
+import SideBar from '@/shared/sideBar'
+import TopBar from '@/shared/topBar'
 import { Typography } from '@/shared/typography'
 
-const Home = () => {
+const Home = (): ReactElement => {
   const [activeTab, setActiveTab] = useState<string>(CATEGORIES[0].value)
 
   return (
@@ -15,7 +16,11 @@ const Home = () => {
       <Typography as='h1' variant='h1'>
         All pizzas
       </Typography>
-      <CategoriesTabs tabs={CATEGORIES} onChange={setActiveTab} activeTab={activeTab} />
+      <TopBar activeTab={activeTab} tabs={CATEGORIES} onChange={setActiveTab} />
+      <div className='mt-7'>
+        <SideBar />
+        <div />
+      </div>
     </Card>
   )
 }
