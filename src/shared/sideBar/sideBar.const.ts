@@ -42,7 +42,7 @@ const INGREDIENTS_OPTIONS = {
 const FILTRATION_OPTIONS = {
   collect: 'Can collect',
   new: 'New',
-}
+} as const
 
 const DOUGH_OPTIONS = {
   thin: 'Thin',
@@ -65,4 +65,10 @@ export const SIDEBAR_FILTERS = {
     type: 'radio',
     options: DOUGH_OPTIONS,
   },
-} as const
+} as const satisfies Record<string, SidebarFilterOptions>
+
+export type SidebarFilterOptions = {
+  label: string
+  type: 'checkbox' | 'radio'
+  options: Record<string, string>
+}

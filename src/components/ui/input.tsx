@@ -5,11 +5,12 @@ import { cn } from '@/lib/utils'
 
 interface Props extends ComponentProps<'input'> {
   isSearch?: boolean
+  width?: string
 }
 
-const Input = ({ className, type, isSearch = false, ...props }: Props): ReactElement => {
+const Input = ({ className, type, isSearch = false, width = 'w-full', ...props }: Props): ReactElement => {
   return (
-    <div className='relative w-full'>
+    <div className={cn('relative', width)}>
       {isSearch && (
         <Search
           width={16}
