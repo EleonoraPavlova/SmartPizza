@@ -6,7 +6,6 @@ import { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 
 const Slider = ({ className, value, min, max, ...props }: ComponentProps<typeof SliderPrimitive.Root>) => {
-  console.log('value', value)
   return (
     <SliderPrimitive.Root
       data-slot='slider'

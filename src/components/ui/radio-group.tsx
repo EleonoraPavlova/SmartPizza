@@ -7,7 +7,7 @@ import { ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 
 const RadioGroup = ({ className, ...props }: ComponentProps<typeof RadioGroupPrimitive.Root>) => {
-  return <RadioGroupPrimitive.Root data-slot='radio-group' className={cn('grid gap-3', className)} {...props} />
+  return <RadioGroupPrimitive.Root data-slot='radio-group' className={cn('grid gap-2', className)} {...props} />
 }
 
 const RadioGroupItem = ({ className, ...props }: ComponentProps<typeof RadioGroupPrimitive.Item>) => {

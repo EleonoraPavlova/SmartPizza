@@ -15,7 +15,7 @@ interface Props {
 
 const RangeFilter = ({ min, max, range, onChange, onChangeInputMin, onChangeInputMax }: Props): ReactElement => {
   return (
-    <div className='flex flex-col gap-3'>
+    <div className='flex flex-col gap-2'>
       <Typography variant='h4'>Price</Typography>
       <div className='flex gap-3.5'>
         <Input
