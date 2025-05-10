@@ -17,9 +17,9 @@ const Home = (): ReactElement => {
         All pizzas
       </Typography>
       <TopBar activeTab={activeTab} tabs={CATEGORIES} onChange={setActiveTab} />
-      <div className='mt-7'>
+      <div className='mt-7 grid grid-cols-[1fr_4fr] gap-[48px]'>
         <SideBar />
-        <div />
+        <div>Menu</div>
       </div>
     </Card>
   )

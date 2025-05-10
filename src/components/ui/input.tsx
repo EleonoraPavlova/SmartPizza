@@ -3,15 +3,21 @@ import { ComponentProps, ReactElement } from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Input = ({ className, type, ...props }: ComponentProps<'input'>): ReactElement => {
+interface Props extends ComponentProps<'input'> {
+  isSearch?: boolean
+}
+
+const Input = ({ className, type, isSearch = false, ...props }: Props): ReactElement => {
   return (
     <div className='relative w-full'>
-      <Search
-        width={16}
-        height={16}
-        color='gray'
-        className='absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none'
-      />
+      {isSearch && (
+        <Search
+          width={16}
+          height={16}
+          color='gray'
+          className='absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none'
+        />
+      )}
       <input
         type={type}
         data-slot='input'

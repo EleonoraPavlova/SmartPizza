@@ -16,7 +16,7 @@ export const Header = forwardRef<HeaderRef, HeaderProps>(({ className, ...rest }
     <header ref={ref} className={cn('w-full bg-background rounded-t-[30px]', className)} {...rest}>
       <div className='flex items-center gap-4 py-[20px] px-[64px]'>
         <Logo />
-        <Input placeholder='Searching of pizza' />
+        <Input placeholder='Searching of pizza' isSearch />
         <div className='flex items-center gap-2'>
           <Button variant='outline'>
             <User width={10} height={10} />

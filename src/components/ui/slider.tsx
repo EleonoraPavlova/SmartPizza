@@ -1,27 +1,15 @@
 'use client'
 
 import * as SliderPrimitive from '@radix-ui/react-slider'
-import { ComponentProps, useMemo } from 'react'
+import { ComponentProps } from 'react'
 
 import { cn } from '@/lib/utils'
 
-const Slider = ({
-  className,
-  defaultValue,
-  value,
-  min = 0,
-  max = 100,
-  ...props
-}: ComponentProps<typeof SliderPrimitive.Root>) => {
-  const _values = useMemo(
-    () => (Array.isArray(value) ? value : Array.isArray(defaultValue) ? defaultValue : [min, max]),
-    [value, defaultValue, min, max]
-  )
-
+const Slider = ({ className, value, min, max, ...props }: ComponentProps<typeof SliderPrimitive.Root>) => {
+  console.log('value', value)
   return (
     <SliderPrimitive.Root
       data-slot='slider'
-      defaultValue={defaultValue}
       value={value}
       min={min}
       max={max}
@@ -42,13 +30,16 @@ const Slider = ({
           className={cn('bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full')}
         />
       </SliderPrimitive.Track>
-      {Array.from({ length: _values.length }, (_, index) => (
-        <SliderPrimitive.Thumb
-          data-slot='slider-thumb'
-          key={index}
-          className='border-primary bg-background ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
-        />
-      ))}
+      <SliderPrimitive.Thumb
+        data-slot='start-thumb'
+        key='min'
+        className='border-primary bg-background ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
+      />
+      <SliderPrimitive.Thumb
+        data-slot='end-thumb'
+        key='max'
+        className='border-primary bg-background ring-ring/50 block size-4 shrink-0 rounded-full border shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50'
+      />
     </SliderPrimitive.Root>
   )
 }
