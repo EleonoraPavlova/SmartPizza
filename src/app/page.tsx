@@ -4,6 +4,7 @@ import { ChangeEvent, ReactElement, useCallback, useState } from 'react'
 
 import { Card } from '@/shared/card'
 import { CATEGORIES } from '@/shared/categoriesTabs/categoriesTabs.const'
+import ProductListSection from '@/shared/productListSection'
 import SideBar from '@/shared/sideBar'
 import { SIDEBAR_FILTERS } from '@/shared/sideBar/sideBar.const'
 import TopBar from '@/shared/topBar'
@@ -84,7 +85,7 @@ const Home = (): ReactElement => {
           onChangeInputMin={onChangeInputMinHandler}
           onChangeInputMax={onChangeInputMaxHandler}
         />
-        <div>Menu</div>
+        <ProductListSection title='Pizzas' />
       </div>
     </Card>
   )

@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
-export const typographyVariants = cva('m-0 p-0', {
+export const typographyVariants = cva('m-0 p-0 break-words whitespace-normal', {
   variants: {
     variant: {
       h1: 'text-[36px] leading-l font-bold xs:text-l xs:leading-m',
