@@ -1,0 +1,27 @@
+{
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "endOfLine": "auto",
+  "printWidth": 120,
+  "requirePragma": true,
+  "arrowParens": "always",
+  "overrides": [
+    {
+      "files": "{**/*,*}.{css,ts,tsx,json,md,mjs}",
+      "excludeFiles": [
+        "**/node_modules/**",
+        "**/dist/**",
+        "**/build/**",
+        "**/coverage/**",
+        "**/public/**",
+        "**/deployment/**"
+      ],
+      "options": {
+        "requirePragma": false
+      }
+    }
+  ]
+}

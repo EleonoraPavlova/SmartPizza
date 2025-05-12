@@ -1,103 +1,94 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { ChangeEvent, ReactElement, useCallback, useState } from 'react'
+
+import { Card } from '@/shared/card'
+import { CATEGORIES } from '@/shared/categoriesTabs/categoriesTabs.const'
+import ProductListSection from '@/shared/productListSection'
+import SideBar from '@/shared/sideBar'
+import { SIDEBAR_FILTERS } from '@/shared/sideBar/sideBar.const'
+import TopBar from '@/shared/topBar'
+import { Typography } from '@/shared/typography'
+
+const Home = (): ReactElement => {
+  const min = 100
+  const max = 1000
+  const [activeTab, setActiveTab] = useState<string>(CATEGORIES[0].value)
+
+  const [slider, setSlider] = useState<number[]>([min, max])
+  const [ingredientsFilterOptions, setIngredientsFilterOptions] = useState<Record<string, string>>(
+    SIDEBAR_FILTERS.INGREDIENTS.options
+  )
+  const [_, setSearch] = useState('')
+
+  const sliderChangeHandler = (newRange: number[]) => {
+    setSlider(newRange)
+  }
+
+  const onChangeInputMinHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const value = Number(event.target.value)
+      if (!isNaN(value) && value <= slider[1] && value >= min) {
+        setSlider([value, slider[1]])
+      }
+    },
+    [slider, min]
+  )
+
+  const onChangeInputMaxHandler = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const value = Number(event.target.value)
+      if (!isNaN(value) && value >= slider[0] && value <= max) {
+        setSlider([slider[0], value])
+      }
+    },
+    [slider, max]
+  )
+
+  const searchHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.toLowerCase()
+    setSearch(query)
+
+    const filtered = Object.entries(SIDEBAR_FILTERS.INGREDIENTS.options)
+      .filter(([_, value]) => value.toLowerCase().includes(query))
+      .sort(([valueA], [valueB]) => {
+        const indexA = valueA.toLowerCase().indexOf(query)
+        const indexB = valueB.toLowerCase().indexOf(query)
+
+        if (indexA === indexB) {
+          return valueA.localeCompare(valueB)
+        }
+
+        return indexA - indexB
+      })
+
+    const sortedFiltered = Object.fromEntries(filtered)
+
+    setIngredientsFilterOptions(sortedFiltered)
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <Card className='gap-[20px] flex flex-col'>
+      <Typography as='h1' variant='h1'>
+        All pizzas
+      </Typography>
+      <TopBar activeTab={activeTab} tabs={CATEGORIES} onChange={setActiveTab} />
+      <div className='mt-7 grid grid-cols-[1fr_4fr] gap-[48px]'>
+        <SideBar
+          min={min}
+          max={max}
+          slider={slider}
+          filters={SIDEBAR_FILTERS}
+          ingredientsFilterOptions={ingredientsFilterOptions}
+          onChangeSlider={sliderChangeHandler}
+          onChangeSearch={searchHandler}
+          onChangeInputMin={onChangeInputMinHandler}
+          onChangeInputMax={onChangeInputMaxHandler}
         />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+        <ProductListSection title='Pizzas' />
+      </div>
+    </Card>
+  )
 }
+
+export default Home

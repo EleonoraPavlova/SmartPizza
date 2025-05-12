@@ -1,0 +1,2 @@
+echo "Running lint-staged... 🔥"
+npx lint-staged && echo "Well done, bro! ✅" || echo "Oops! Linting failed ❌"
