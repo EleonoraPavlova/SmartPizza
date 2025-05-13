@@ -4,8 +4,6 @@ import { ReactElement } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { Typography } from '@/shared/typography'
 
-// interface Props {}
-
 const SortPopover = (): ReactElement => {
   return (
     <Popover>
