@@ -4,10 +4,9 @@ export interface TabOption {
 }
 
 export const CATEGORIES: TabOption[] = [
-  { label: 'All', value: 'all' },
-  { label: 'Meat', value: 'meat' },
-  { label: 'Spicy', value: 'spicy' },
-  { label: 'Sweet', value: 'sweet' },
+  { label: 'Pizzas', value: 'pizzas' },
+  { label: 'Salads', value: 'salads' },
+  { label: 'Breakfast', value: 'breakfast' },
   { label: 'Vegan', value: 'vegan' },
   { label: 'Chicken', value: 'chicken' },
 ]

@@ -9,11 +9,12 @@ import SideBar from '@/shared/sideBar'
 import { SIDEBAR_FILTERS } from '@/shared/sideBar/sideBar.const'
 import TopBar from '@/shared/topBar'
 import { Typography } from '@/shared/typography'
+import { useCategoryStore } from '@/store/category'
 
 const Home = (): ReactElement => {
   const min = 100
   const max = 1000
-  const [activeTab, setActiveTab] = useState<string>(CATEGORIES[0].value)
+  const setActiveCategoryId = useCategoryStore((state) => state.setActiveCategoryId)
 
   const [slider, setSlider] = useState<number[]>([min, max])
   const [ingredientsFilterOptions, setIngredientsFilterOptions] = useState<Record<string, string>>(
@@ -72,8 +73,8 @@ const Home = (): ReactElement => {
       <Typography as='h1' variant='h1'>
         All pizzas
       </Typography>
-      <TopBar activeTab={activeTab} tabs={CATEGORIES} onChange={setActiveTab} />
-      <div className='mt-7 grid grid-cols-[1fr_4fr] gap-[48px]'>
+      <TopBar tabs={CATEGORIES} onChange={setActiveCategoryId} />
+      <div className='mt-7 flex gap-[48px]'>
         <SideBar
           min={min}
           max={max}
@@ -85,7 +86,11 @@ const Home = (): ReactElement => {
           onChangeInputMin={onChangeInputMinHandler}
           onChangeInputMax={onChangeInputMaxHandler}
         />
-        <ProductListSection title='Pizzas' />
+        <div className='flex-1'>
+          <ProductListSection title='Pizzas' id='pizzas' />
+          <ProductListSection title='Salads' id='salads' />
+          <ProductListSection title='Breakfast' id='breakfast' />
+        </div>
       </div>
     </Card>
   )
