@@ -19,7 +19,6 @@ const Logo = ({ isClickable = true }: Props): ReactElement => {
     if (isClickable) {
       e.preventDefault()
       router.push('/')
-      console.log('click', e)
     }
   }
 

@@ -31,6 +31,7 @@ const config = [
       '**/.turbo/**',
       '**/.husky/**',
       'eslint.config.mjs',
+      'src/lib/prisma/prisma/*',
     ],
   },
   {
